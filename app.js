@@ -71,6 +71,75 @@ app.post('/api/v1/tours', (req, res) => {
   );
 });
 
+//?PATCH REQUEST
+app.patch('/api/v1/tours/:id', (req, res) => {
+  const id = req.params.id * 1;
+  const tourIndex = tours.findIndex((tour) => tour.id === id);
+
+  if (tourIndex === -1) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid ID',
+    });
+  }
+
+  const updatedTour = { ...tours[tourIndex], ...req.body };
+  tours[tourIndex] = updatedTour;
+
+  fs.writeFile(
+    `${__dirname}/dev-data/data/tours-simple.json`,
+    JSON.stringify(tours),
+    (err) => {
+      if (err) {
+        return res.status(500).json({
+          status: 'error',
+          message: 'Could not update tour',
+        });
+      }
+
+      res.status(200).json({
+        status: 'success',
+        data: {
+          tour: updatedTour,
+        },
+      });
+    }
+  );
+});
+
+//?DELETE REQUEST
+app.delete('/api/v1/tours/:id', (req, res) => {
+  const id = req.params.id * 1;
+  const tourIndex = tours.findIndex((tour) => tour.id === id);
+
+  if (tourIndex === -1) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid ID',
+    });
+  }
+
+  tours.splice(tourIndex, 1);
+
+  fs.writeFile(
+    `${__dirname}/dev-data/data/tours-simple.json`,
+    JSON.stringify(tours),
+    (err) => {
+      if (err) {
+        return res.status(500).json({
+          status: 'error',
+          message: 'Could not delete tour',
+        });
+      }
+
+      res.status(204).json({
+        status: 'success',
+        data: null,
+      });
+    }
+  );
+});
+
 const port = 3000;
 app.listen(port, () => {
   console.log(`App running on port ${port}...`);
