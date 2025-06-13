@@ -4,12 +4,17 @@
   "description": "Learning node, express and mongoDB",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start:dev": "cross-env nodemon server.js",
+    "start:prod": "cross-env NODE_ENV=production nodemon server.js"
   },
   "author": "Okan Cingoz",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.5.0",
     "express": "^4.21.2",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
