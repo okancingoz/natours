@@ -12,8 +12,8 @@ exports.checkBody = (req, res, next) => {
 
 exports.getAllTours = async (req, res) => {
   try {
-    //BUILD QUERY
-    //FILTERING
+    // BUILD QUERY
+    // FILTERING
     // eslint-disable-next-line node/no-unsupported-features/es-syntax
     const queryObj = { ...req.query };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
@@ -28,13 +28,13 @@ exports.getAllTours = async (req, res) => {
 
     // ADVANCED FILTERING
     // { difficulty: 'easy', duration: {$gte:5}}
-    //ge,gt,lte,lt
+    // ge,gt,lte,lt
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
 
     let query = Tour.find(JSON.parse(queryStr));
 
-    //SORTING
+    // SORTING
     if (req.query.sort) {
       const sortBy = req.query.sort.split(',').join(' ');
       query = query.sort(sortBy);
@@ -43,10 +43,18 @@ exports.getAllTours = async (req, res) => {
       query = query.sort('-createdAt');
     }
 
+    // FIELD LIMITING
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      query = query.select('-__v');
+    }
+
     //EXECUTE QUERY
     const tours = await query;
 
-    //SEND RESPONSE
+    // SEND RESPONSE
     res.status(200).json({
       status: 'success',
       results: tours.length,
