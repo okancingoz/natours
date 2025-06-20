@@ -32,18 +32,4 @@ app.use(globalErrorHandler);
 //*START SERVER
 module.exports = app;
 
-//*ROUTES
 
-// //?GET REQUEST
-// app.get('/api/v1/tours', getAllTours);
-
-// app.get('/api/v1/tours/:id', getTour);
-
-// //?POST REQUEST
-// app.post('/api/v1/tours', createTour);
-
-// //?PATCH REQUEST
-// app.patch('/api/v1/tours/:id', updateTour);
-
-// //?DELETE REQUEST
-// app.delete('/api/v1/tours/:id', deleteTour);
