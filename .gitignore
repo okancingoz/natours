@@ -1,0 +1,20 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Log dosyaları
+*.log
+
+# Derlenen dosyalar / build klasörleri
+dist/
+build/
+
+# Test coverage klasörü
+coverage/
+
+# OS ve editör dosyaları (isteğe bağlı)
+.DS_Store
+Thumbs.db
+.vscode/
