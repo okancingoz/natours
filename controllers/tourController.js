@@ -1,6 +1,6 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 const Tour = require('../models/tourModel');
-const APIFeatures = require('../utils/api-features');
+const APIFeatures = require('../utils/apiFeatures');
 
 exports.checkBody = (req, res, next) => {
   if (!req.body.name || !req.body.price) {
