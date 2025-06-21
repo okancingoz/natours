@@ -1,11 +1,13 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 const AppError = require('../utils/appError');
 
+// INVALID ID
 const handleCastErrorDB = (err) => {
   const message = `Invalid ${err.path}: ${err.value}.`;
   return new AppError(message, 400);
 };
 
+// DUPLICATE FIELDS FOR UNIQUE
 const handleDuplicateFieldsDB = (err) => {
   const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
   console.log(value);
@@ -13,6 +15,7 @@ const handleDuplicateFieldsDB = (err) => {
   return new AppError(message, 400);
 };
 
+// VALIDATION
 const handleValidationErrorDB = (err) => {
   const errors = Object.values(err.errors).map((el) => el.message);
   const message = `Invalid input data. ${errors.join('. ')}`;
