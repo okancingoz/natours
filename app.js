@@ -31,5 +31,3 @@ app.use(globalErrorHandler);
 
 //*START SERVER
 module.exports = app;
-
-
