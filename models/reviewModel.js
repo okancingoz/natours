@@ -33,6 +33,11 @@ const reviewSchema = new mongoose.Schema(
   },
 );
 
+reviewSchema.pre(/^find/, function (next) {
+  this.populate('tour').populate('user');
+  next();
+});
+
 const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;
