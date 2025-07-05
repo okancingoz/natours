@@ -22,5 +22,8 @@
         "extensions": [".js", ".json"]
       }
     }
+  },
+  "parserOptions": {
+    "sourceType": "module"
   }
 }
