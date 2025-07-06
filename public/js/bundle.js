@@ -12654,7 +12654,7 @@ var logout = exports.logout = /*#__PURE__*/function () {
           return _axios.default.get('http://127.0.0.1:3000/api/v1/users/logout');
         case 1:
           res = _context2.v;
-          if (res.data.status === 'success') location.reload(true);
+          if (res.data.status === 'success') location.reload();
           _context2.n = 3;
           break;
         case 2:
